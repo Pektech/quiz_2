@@ -79,3 +79,4 @@ def running_game(current_question_index):
 #     else:
 #         current_question_index = running_game(current_question_index)
 # print("game  over")
+##fire_button = pygame.event.Event(FIRE_BUTTON)

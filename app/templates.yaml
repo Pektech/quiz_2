@@ -1,6 +1,6 @@
-welcome: "Welcome to the Legends Quiz. If your ready to play,  say 'Start quiz',  or say
+welcome: <speak><voice name='Salli'>"Welcome to the Legends Quiz Version 2. If your ready to play,  say 'Start quiz',  or say
           'Explain' to learn more about this game"
-
+          </voice></speak>
 help: "This is a 10 question quiz built around world mythology and legends. I will ask a question and give
  you four possible answers.  Just shout out the number of the correct answer. At the end I will give
   you a score. Say 'Start Quiz' if you want to start or 'Quit' to end"
