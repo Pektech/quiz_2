@@ -1,9 +1,18 @@
 welcome: <speak><voice name='Salli'>"Welcome to the Legends Quiz Version 2. If your ready to play,  say 'Start quiz',  or say
           'Explain' to learn more about this game"
           </voice></speak>
+
 help: "This is a 10 question quiz built around world mythology and legends. I will ask a question and give
  you four possible answers.  Just shout out the number of the correct answer. At the end I will give
   you a score. Say 'Start Quiz' if you want to start or 'Quit' to end"
+
+
+config_quiz: <speak><voice name='Salli'>"okay before I begin. How long a game would you like? Say 'short' for five questions, '
+            medium' for ten questions or 'long' for twenty questions "
+            </voice></speak>
+
+error_2: <speak><voice name='Salli'>"Sorry it has to be five questions, 10 questions or 20 questions only"
+  </voice></speak>
 
 game: "{{choose_card}}"
 

@@ -4,26 +4,57 @@ from flask import render_template
 from random import randrange, sample
 
 from app import ask
-from app.mechanics import create_questions_list, populate_round_answers
+from app.mechanics import create_questions_list, populate_round_answers, game_length
 from app.data import data
 
 
 @ask.launch
-def start_skill():
+def start_skill(quiz_length):
     output = render_template("welcome")
     ask_session.attributes["GAME_RUNNING"] = 0
     ask_session.attributes["SCORE"] = 0
     ask_session.attributes["last_speech"] = output
-    questions_list = create_questions_list(data)
-    ask_session.attributes["Q_List"] = questions_list
+    # questions_list = create_questions_list(data)
+    # ask_session.attributes["Q_List"] = questions_list
     ask_session.attributes["CURRENT_Q_INDEX"] = 0
     ask_session.attributes["ANSWER_COUNT"] = 4
+    if quiz_length is not None:
+        start_game(quiz_length)
+    else:
+        return question(output).reprompt(ask_session.attributes["last_speech"])
 
+
+@ask.intent("ConfigQuiz")
+def config_quiz():
+    output = render_template("config_quiz")
+    ask_session.attributes["last_speech"] = output
     return question(output).reprompt(ask_session.attributes["last_speech"])
 
 
 @ask.intent("StartQuiz")
-def start_game():
+def start_game(quiz_length):
+    print(quiz_length)
+    if "CURRENT_Q_INDEX" not in ask_session.attributes:
+        print("no index")
+        ask_session.attributes["CURRENT_Q_INDEX"] = 0
+    if "GAME_RUNNING" not in ask_session.attributes:
+        print("no index")
+        ask_session.attributes["GAME_RUNNING"] = 0
+    if "ANSWER_COUNT" not in ask_session.attributes:
+        print("no index")
+        ask_session.attributes["ANSWER_COUNT"] = 4
+    if "SCORE" not in ask_session.attributes:
+        print("no index")
+        ask_session.attributes["SCORE"] = 0
+
+    quiz_length = game_length(quiz_length)
+    if quiz_length == "error":
+        output = render_template("error_2")
+        ask_session.attributes["last_speech"] = output
+        return question(output)
+    ask_session.attributes["Q_LENGTH"] = quiz_length
+    questions_list = create_questions_list(data, quiz_length)
+    ask_session.attributes["Q_List"] = questions_list
     current_question = ask_session.attributes["CURRENT_Q_INDEX"]
     questions = ask_session.attributes["Q_List"]
     if ask_session.attributes["GAME_RUNNING"] == 1:
@@ -71,13 +102,14 @@ def ask_question():
 
 @ask.intent("AnswerQuestion")
 def answer_question(user_answer):
+    quiz_length = ask_session.attributes["Q_LENGTH"]
     user_answer = int(user_answer) - 1
     if user_answer > 3:
         output = render_template("error")
         ask_session.attributes["last_speech"] = output
         return question(output)
     current_q_index = ask.session.attributes["CURRENT_Q_INDEX"]
-    while current_q_index < 9:
+    while current_q_index < quiz_length - 1:
         correct_answer_index = ask_session.attributes["CORRECT_ANSWER_INDEX"]
         score = ask_session.attributes["SCORE"]
         ask_session.attributes["CURRENT_Q_INDEX"] += 1

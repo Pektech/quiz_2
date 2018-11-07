@@ -12,7 +12,7 @@ GAME_LENGTH = 10
 current_question_index = 0
 
 
-def create_questions_list(myth_questions):
+def create_questions_list(myth_questions, quiz_length):
     """create a random dict of set length from the data questions"""
     # questions = []
     # res = myth_questions
@@ -22,7 +22,7 @@ def create_questions_list(myth_questions):
     #     questions.append(res['QUESTIONS'][index])
     # return questions
     """create a random list of set length from the data questions"""
-    questions_list = sample(myth_questions["QUESTIONS"], k=NUM_OF_QUESTIONS)
+    questions_list = sample(myth_questions["QUESTIONS"], k=quiz_length)
     return questions_list
 
 
@@ -71,6 +71,18 @@ def running_game(current_question_index):
     print("next question", SCORE)
     current_question_index += 1
     return current_question_index
+
+
+def game_length(quiz_length):
+    if quiz_length == "short":
+        quiz_length = 5
+    elif quiz_length == "medium":
+        quiz_length = 10
+    elif quiz_length == "long":
+        quiz_length = 10
+    else:
+        quiz_length = "error"
+    return quiz_length
 
 
 # while current_question_index < 3:
