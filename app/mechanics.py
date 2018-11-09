@@ -1,18 +1,19 @@
 from app.data import data
 from random import choices, randrange, sample
+from flask_ask import context
 
 myth_questions = data
 
 
-SCORE = 0
-Q_COUNT = 0
-NUM_OF_QUESTIONS = 10
-ANSWER_COUNT = 4
-GAME_LENGTH = 10
-current_question_index = 0
+# SCORE = 0
+# Q_COUNT = 0
+# NUM_OF_QUESTIONS = 10
+# ANSWER_COUNT = 4
+# GAME_LENGTH = 10
+# current_question_index = 0
 
 
-def create_questions_list(myth_questions):
+def create_questions_list(myth_questions, quiz_length):
     """create a random dict of set length from the data questions"""
     # questions = []
     # res = myth_questions
@@ -22,7 +23,7 @@ def create_questions_list(myth_questions):
     #     questions.append(res['QUESTIONS'][index])
     # return questions
     """create a random list of set length from the data questions"""
-    questions_list = sample(myth_questions["QUESTIONS"], k=NUM_OF_QUESTIONS)
+    questions_list = sample(myth_questions["QUESTIONS"], k=quiz_length)
     return questions_list
 
 
@@ -73,6 +74,18 @@ def running_game(current_question_index):
     return current_question_index
 
 
+def game_length(quiz_length):
+    if quiz_length == "short":
+        quiz_length = 5
+    elif quiz_length == "medium":
+        quiz_length = 10
+    elif quiz_length == "long":
+        quiz_length = 10
+    else:
+        quiz_length = "error"
+    return quiz_length
+
+
 # while current_question_index < 3:
 #     if current_question_index == 0:
 #         current_question_index = start_game(SCORE)
@@ -80,3 +93,18 @@ def running_game(current_question_index):
 #         current_question_index = running_game(current_question_index)
 # print("game  over")
 ##fire_button = pygame.event.Event(FIRE_BUTTON)
+
+
+def what_display():
+    # if context.System.device.supportedInterfaces == {}:
+    #     display = None
+    #     return display
+    print(context.Viewport.shape, "PEK")
+    display = context.Viewport.shape
+    if display == "ROUND":
+        print("round")
+    elif display == "RECTANGLE":
+        print("show")
+    else:
+        print("none")
+    return display
