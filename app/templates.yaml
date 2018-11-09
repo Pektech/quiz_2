@@ -16,13 +16,13 @@ error_2: <speak><voice name='Salli'>"Sorry it has to be five questions, 10 quest
 
 game: "{{choose_card}}"
 
-correct: "That's correct. okay next {{next_question}}"
+correct: <speak><voice name='Salli'>"That's correct. okay next {{next_question}}"</voice></speak>
 
-wrong: "Sorry that's wrong. Lets try another {{ next_question}}"
+wrong: <speak><voice name='Salli'>"Sorry that's wrong. Lets try another {{ next_question}}"</voice></speak>
 
 
 
-score: "Okay game over. You got {{score}} questions correct"
+score: <speak><voice name='Salli'>"Okay game over. You got {{score}} questions correct"</voice></speak>
 
 playing: "The game has already started.  Say 'Repeat' to hear the last question or 'Explain' to hear
   the instructions again"

@@ -1,15 +1,16 @@
 from app.data import data
 from random import choices, randrange, sample
+from flask_ask import context
 
 myth_questions = data
 
 
-SCORE = 0
-Q_COUNT = 0
-NUM_OF_QUESTIONS = 10
-ANSWER_COUNT = 4
-GAME_LENGTH = 10
-current_question_index = 0
+# SCORE = 0
+# Q_COUNT = 0
+# NUM_OF_QUESTIONS = 10
+# ANSWER_COUNT = 4
+# GAME_LENGTH = 10
+# current_question_index = 0
 
 
 def create_questions_list(myth_questions, quiz_length):
@@ -92,3 +93,18 @@ def game_length(quiz_length):
 #         current_question_index = running_game(current_question_index)
 # print("game  over")
 ##fire_button = pygame.event.Event(FIRE_BUTTON)
+
+
+def what_display():
+    # if context.System.device.supportedInterfaces == {}:
+    #     display = None
+    #     return display
+    print(context.Viewport.shape, "PEK")
+    display = context.Viewport.shape
+    if display == "ROUND":
+        print("round")
+    elif display == "RECTANGLE":
+        print("show")
+    else:
+        print("none")
+    return display
