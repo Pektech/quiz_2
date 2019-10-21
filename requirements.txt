@@ -54,7 +54,7 @@ troposphere==2.3.3
 unidecode==1.0.22
 urllib3==1.24 ; python_version >= '3.4'
 virtualenv==16.0.0
-werkzeug==0.14.1
+werkzeug==0.15.3
 wheel==0.32.2
 wsgi-request-logger==0.4.6
 zappa==0.47.0
