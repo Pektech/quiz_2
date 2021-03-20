@@ -27,7 +27,7 @@ idna==2.7
 importlib-metadata==0.6
 importlib-resources==1.0.1 ; python_version < '3.7'
 itsdangerous==1.1.0
-jinja2==2.10
+jinja2==2.11.3
 jmespath==0.9.3
 kappa==0.6.0
 lambda-packages==0.20.0
